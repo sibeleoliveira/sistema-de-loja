@@ -1,13 +1,12 @@
-
 package ui;
 
-import cliente;
-import produto;
-
+import dados;
 import java.util.Scanner;
 
 public class ConsoleMenu {
   private int input = -1;
+  private ArmazenamentoClientes clientes = new ArmazenamentoClientes();
+  private EstoqueProdutos produtos = new EstoqueProdutos();
   
   do{
   
@@ -19,7 +18,23 @@ public class ConsoleMenu {
     System.out.println("0 - Sair");
 
     if(input == 1){
-      System.out.println("
+      produtos.cadastrarProduto();
+    } else if(input == 2){
+
+    } else if(input == 3){
+      clientes.cadastrarCleinte();
+    } else if(input == 4){
+
+    }else if(input == 5){
+
+    }else if(input == 6){
+      
+    }else if(input == 7){
+      produtos.listarProdutos();
+    }else if(input == 8){
+      clientes.listarClientes();
+    } else if(input == 0){
+      System.out.println("SAINDO...");
     }
 
   }while(input != 0);
