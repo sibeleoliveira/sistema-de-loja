@@ -10,7 +10,6 @@ public class Produto {
   //Construtor
   public Produto(int id, String nome, BigDecimal precoBase){
     this.id = id;
-    this.estoque = estoque;
     this.nome = nome;
     this.precoBase = precoBase;
   }
