@@ -39,4 +39,6 @@ public class Produto {
   public void setPrecoBase(BigDecimal precoBase){
     this.precoBase = precoBase;
   }
+
+  
 }
