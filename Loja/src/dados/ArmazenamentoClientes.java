@@ -14,7 +14,7 @@ public class ArmazenamentoClientes {
 	    public Cliente buscarPorId(String id) {
 	        for (int i = 0; i < contador; i++) {
 	            if (clientes[i].getId().equals(id)) {
-	            	
+	            	return clientes[i];
 	            }
 	        }
 	        return null;
