@@ -1,11 +1,13 @@
-import java.math.BigDecimal;
 package produto;
 
-public class Produto {
+import java.math.BigDecimal;
+
+public abstract class Produto {
   //Atributos
   private int id;
   private String nome;
-  private BigDecimal precoBase
+  private BigDecimal precoBase;
+  
 
   //Construtor
   public Produto(int id, String nome, BigDecimal precoBase){
@@ -13,6 +15,8 @@ public class Produto {
     this.nome = nome;
     this.precoBase = precoBase;
   }
+  
+  public abstract int getTipo();
 
   //Getters
   public int getId(){
@@ -23,7 +27,7 @@ public class Produto {
     return nome;
   }
 
-  public BigDecimal(){
+  public BigDecimal getPrecoBase(){
     return precoBase;
   }
 
