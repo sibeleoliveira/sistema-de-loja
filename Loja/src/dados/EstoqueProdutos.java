@@ -38,12 +38,12 @@ public class EstoqueProdutos{
 		String nome = scanner.nextLine();
 
 		System.out.println("Insira o Preço Base: ");
-		BigDecimal precoBase = scanner.nextBigDecimal();
+		BigDecimal precoBase =  new BigDecimal(scanner.nextLine());
 	
 		int tipo;
 		do{
 		System.out.println("Insira o Tipo (1 - Físico | 2 - Digital | 3 - Perecivel): ");
-		tipo = scanner.nextInt();
+		tipo = Integer.parseInt(scanner.nextLine());
 		}while(tipo < 1 || tipo > 3);
 
 		if(tipo == 1){
@@ -59,7 +59,7 @@ public class EstoqueProdutos{
 
 	public void listarProdutos(){
 	System.out.println("Tipo de produto (0 - Todos | 1 - Físico | 2 - Digital | 3 - Perecivel): ");
-	int tipo = scanner.nextInt();
+	int tipo = Integer.parseInt(scanner.nextLine());
 
 	System.out.println("-- Lista de Produtos--");
 	if(tipo == 0){
@@ -86,4 +86,35 @@ public class EstoqueProdutos{
 		}
     }
   }
+
+
+	public void alterarProduto(){
+		System.out.println("Digite o ID do produto a ser alterado: ");
+		int idAlterado = Integer.parseInt(scanner.nextLine());
+
+		int i = 0;
+		boolean run = true;
+		while(run && i < contador){
+			if(produtos[i].getId() == idAlterado){
+				run = false;
+			} else {
+				i++;
+			}
+		}
+
+		if(i < contador){
+			System.out.println("Insira o novo NOME: ");
+			String novoNome = scanner.nextLine();
+			produtos[i].setNome(novoNome);
+
+			System.out.println("Insira o novo PREÇO BASE: ");
+			BigDecimal novoPrecoBase = new BigDecimal(scanner.nextLine());
+			produtos[i].setPrecoBase(novoPrecoBase);
+
+			System.out.println("Produto Alterado com sucesso!");
+		} else {
+			System.out.println("Não existe um produto com este ID");
+		}
+
+	}	
 }

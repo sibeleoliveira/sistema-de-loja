@@ -29,7 +29,7 @@ public class ConsoleMenu {
 		    if(input == 1){
 		      produtos.cadastrarProduto();
 		    } else if(input == 2){
-
+				produtos.alterarProduto();
 		    } else if(input == 3){
 		      clientes.cadastrarCliente();
 		    } else if(input == 4){
