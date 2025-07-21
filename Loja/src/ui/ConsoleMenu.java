@@ -1,7 +1,7 @@
 package ui;
 
-import dados.ArmazenamentoClientes;
-import dados.EstoqueProdutos;
+import armazenamento.ArmazenamentoClientes;
+import armazenamento.ArmazenamentoProdutos;
 
 
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ConsoleMenu {
   private int input = -1;
   private ArmazenamentoClientes clientes = new ArmazenamentoClientes();
-  private EstoqueProdutos produtos = new EstoqueProdutos();
+  private ArmazenamentoProdutos produtos = new ArmazenamentoProdutos();
   private Scanner scanner = new Scanner(System.in);
   
   

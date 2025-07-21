@@ -2,25 +2,28 @@ package produto;
 
 import java.math.BigDecimal;
 
-public abstract class Produto {
+public class Produto {
   //Atributos
-  private int id;
+  private int id, quantidade, tipo;
   private String nome;
   private BigDecimal precoBase;
   
 
   //Construtor
-  public Produto(int id, String nome, BigDecimal precoBase){
+  public Produto(int id, int quantidade, String nome, BigDecimal precoBase){
     this.id = id;
+    this.quantidade = quantidade;
     this.nome = nome;
     this.precoBase = precoBase;
   }
-  
-  public abstract int getTipo();
 
   //Getters
   public int getId(){
     return id;
+  }
+
+  public int getQuantidade(){
+    return quantidade;
   }
 
   public String getNome(){
@@ -31,9 +34,17 @@ public abstract class Produto {
     return precoBase;
   }
 
+  public int getTipo(){
+    return tipo;
+  }
+
   //Setters
   public void setId(int id){
     this.id = id;
+  }
+
+  public void setQuantidade(int quantidade){
+    this.quantidade = quantidade;
   }
 
   public void setNome(String nome){

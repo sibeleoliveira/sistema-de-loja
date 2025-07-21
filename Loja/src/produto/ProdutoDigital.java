@@ -7,8 +7,8 @@ public class ProdutoDigital extends Produto{
   private static final int tipo = 1;
 
   //Construtor
-  public ProdutoDigital(int id, String nome, BigDecimal precoBase){
-    super(id, nome, precoBase);
+  public ProdutoDigital(int id, int quantidade, String nome, BigDecimal precoBase){
+    super(id, quantidade, nome, precoBase);
   }
 
   public int getTipo(){
