@@ -5,6 +5,7 @@ public class Armazenamento{
 
     //Getters
     public int getMAX(){return MAX;}
+
 }
 
 /*

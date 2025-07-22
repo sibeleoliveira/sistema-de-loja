@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class ProdutoDigital extends Produto{
   //Id do tipo;
-  private static final int tipo = 1;
+  private static final int tipo = 2;
 
   //Construtor
   public ProdutoDigital(int id, int quantidade, String nome, BigDecimal precoBase){

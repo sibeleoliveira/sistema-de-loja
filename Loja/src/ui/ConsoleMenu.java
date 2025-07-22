@@ -1,18 +1,18 @@
 package ui;
 
 import armazenamento.*;
-
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ConsoleMenu {
-	private int input = -1;
+	private String input;
 	private ArmazenamentoClientes clientes = new ArmazenamentoClientes();
 	private ArmazenamentoProdutos produtos = new ArmazenamentoProdutos();
 	private ArmazenamentoNotas notas = new ArmazenamentoNotas();
 	private Scanner scanner = new Scanner(System.in);
 
 	public void play() {
-
+		boolean verificaSaida = false; 
 		do {
 
 			System.out.println("--Menu Principal--");
@@ -22,30 +22,35 @@ public class ConsoleMenu {
 			System.out.println("7 - Listar Produtos       8 - Listar Clientes");
 			System.out.println("0 - Sair");
 
-			input = Integer.parseInt(scanner.nextLine());
+			input = scanner.nextLine();
 
-			if (input == 1) {
+			if(input.isBlank()){
+				System.out.println("Campo Vazio!! Tente Novamente");
+			} else if (Integer.parseInt(input) == 1) {
 				produtos.cadastrarProduto();
-			} else if (input == 2) {
+			} else if (Integer.parseInt(input) == 2) {
 				produtos.alterarProduto();
-			} else if (input == 3) {
+			} else if (Integer.parseInt(input) == 3) {
 				clientes.cadastrarCliente();
-			} else if (input == 4) {
+			} else if (Integer.parseInt(input) == 4) {
 				clientes.listarClientes();
 				clientes.alterarCliente();
-			} else if (input == 5) {
+			} else if (Integer.parseInt(input) == 5) {
 				notas.criarNota(clientes,produtos);
-			} else if (input == 6) {
+			} else if (Integer.parseInt(input) == 6) {
 				notas.listarNotasEmitidas();
-			} else if (input == 7) {
+			} else if (Integer.parseInt(input) == 7) {
 				produtos.listarProdutos();
-			} else if (input == 8) {
+			} else if (Integer.parseInt(input) == 8) {
 				clientes.listarClientes();
-			} else if (input == 0) {
+			} else if (Integer.parseInt(input) == 0) {
 				System.out.println("SAINDO...");
+				verificaSaida = true;
+			} else{
+				System.out.println("OPÇÃO INVÁLIDA! TENTE NOVAMENTE");
 			}
 
-		} while (input != 0);
+		} while (!verificaSaida);
 
 	}
 

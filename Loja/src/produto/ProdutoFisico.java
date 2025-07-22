@@ -3,7 +3,7 @@ package produto;
 import java.math.BigDecimal;
 
 public class ProdutoFisico extends Produto {
-  private static final int tipo = 2;
+  private static final int tipo = 1;
 
   public ProdutoFisico(int id, int quantidade, String nome, BigDecimal precoBase){
     super(id, quantidade, nome, precoBase);

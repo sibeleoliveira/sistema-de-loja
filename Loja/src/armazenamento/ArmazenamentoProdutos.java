@@ -25,16 +25,24 @@ public class ArmazenamentoProdutos extends Armazenamento{
 		return;
 		} 
 		
-		System.out.println("--CADASTRANDO PRODUTO--");
+		System.out.println("--CADASTRANDO PRODUTO-- (DIGITE SAIR PARA CANCELAR A OPERAÇÃO)");
 
-        int id;
+        String inputId;
+		boolean verificaCampo = false;
         do {
             System.out.println("Insira o ID: ");
-            id = Integer.parseInt(scanner.nextLine());
-            if(buscarPorId(id)!=null){
-            System.out.println("ID já cadastrado. Tente outro.");
-            }
-        }while(buscarPorId(id)!=null);
+			inputId = scanner.nextLine();
+			if(inputId.equals("SAIR")) return; //VERIFICA SE O USUÁRIO QUER SAIR
+			if(inputId.isBlank()){
+				System.out.println("Campo Vazio!! Tente Novamente"); //VERIFICA SE O CAMPO ESTÁ VAZIO
+			} else {
+				if(buscarPorId(Integer.parseInt(inputId))!=null){ // VERIFICA SE O ID JÁ EXISTE
+						System.out.println("ID já cadastrado. Tente outro.");
+				} else{
+					verificaCampo = true;
+				}
+			}
+        }while(!verificaCampo);
     
         String nome;
         do {
@@ -45,93 +53,187 @@ public class ArmazenamentoProdutos extends Armazenamento{
             }
         } while(nome.isBlank());
 
-		System.out.println("Insira o Preço Base: ");
-		BigDecimal precoBase =  new BigDecimal(scanner.nextLine());
+		verificaCampo = false;
+		String inputPrecoBase;
+		do{
+			System.out.println("Insira o Preço Base: ");
+			inputPrecoBase = scanner.nextLine();
+			if(inputPrecoBase.equals("SAIR")) return; //VERIFICA SE O USUÁRIO QUER SAIR
+			if(inputPrecoBase.isBlank()){
+				System.out.println("Campo Vazio!! Tente Novamente"); //VERIFICA SE O CAMPO ESTÁ VAZIO
+			} else {
+				verificaCampo = true;
+			}
+		}while(!verificaCampo);
 
-		System.out.println("Insira a Quantidade: ");
-		int quantidade = Integer.parseInt(scanner.nextLine());
+		verificaCampo = false;
+		String inputQuantidade;
+		do{
+			System.out.println("Insira a Quantidade: ");
+			inputQuantidade = scanner.nextLine();
+			if(inputQuantidade.equals("SAIR")) return; //VERIFICA SE O USUÁRIO QUER SAIR
+			if(inputQuantidade.isBlank()){
+				System.out.println("Campo Vazio!! Tente Novamente"); //VERIFICA SE O CAMPO ESTÁ VAZIO
+			} else {
+				verificaCampo = true;
+			}
+		}while(!verificaCampo);
 	
+		verificaCampo = false;
+		String inputTipo;
 		int tipo;
 		do{
-		System.out.println("Insira o Tipo (1 - Físico | 2 - Digital | 3 - Perecivel): ");
-		tipo = Integer.parseInt(scanner.nextLine());
+			do{
+				System.out.println("Insira o Tipo (1 - Físico | 2 - Digital | 3 - Perecivel) ");
+				inputTipo = scanner.nextLine();
+				if(inputTipo.equals("SAIR")) return; //VERIFICA SE O USUÁRIO QUER SAIR
+				if(inputTipo.isBlank()){
+					System.out.println("Campo Vazio!! Tente Novamente"); //VERIFICA SE O CAMPO ESTÁ VAZIO
+				} else {
+					verificaCampo = true;
+				}
+			}while(!verificaCampo);
+			tipo = Integer.parseInt(inputTipo);
+			if(tipo < 1 || tipo > 3) System.out.println("Não há esse tipo, digite novamente!");
 		}while(tipo < 1 || tipo > 3);
 
 		if(tipo == 1){
-			produtos[estoque++] = new ProdutoFisico(id, quantidade, nome, precoBase);
+			produtos[estoque++] = new ProdutoFisico(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase));
 		} else if(tipo == 2){
-			produtos[estoque++] = new ProdutoDigital(id, quantidade, nome, precoBase);
+			produtos[estoque++] = new ProdutoDigital(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase));
 		} else if(tipo == 3){
-			produtos[estoque++] = new ProdutoPerecivel(id, quantidade, nome, precoBase);
+			produtos[estoque++] = new ProdutoPerecivel(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase));
 		}
 
 		System.out.println("Produto cadastrado com sucesso!");
 	}
 
-	public void listarProdutos(){
-		System.out.println("Tipo de produto (0 - Todos | 1 - Físico | 2 - Digital | 3 - Perecivel): ");
-		int tipo = Integer.parseInt(scanner.nextLine());
+	public boolean listarProdutos(){
+		if(estoque == 0) {
+			System.out.println("Não há produtos cadastrados!");
+			return false;
+		}
+		
+		String inputTipo;
+		boolean verificaCampo = false;
+		int tipo;
+		do{
+			do{
+				System.out.println("Digite o tipo de produto (0 - Todos | 1 - Físico | 2 - Digital | 3 - Perecivel)");
+				inputTipo = scanner.nextLine();
+				if(inputTipo.isBlank()){System.out.println("Campo Vazio!! Tente Novamente");}
+				else {verificaCampo = true;}
+			}while(!verificaCampo);
+			tipo = Integer.parseInt(inputTipo);
+			if(tipo < 0 || tipo > 3) System.out.println("Não há esse tipo, digite novamente!");
+		}while(tipo < 0 || tipo > 3);
 
+
+		boolean verificaEstoqueTipo = false;
 		System.out.println("-- Lista de Produtos--");
 		if(tipo == 0){
 			for(int i = 0; i < estoque; i++) {
-				System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+				System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | TIPO: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getTipo());
 			}
+			if(estoque != 0) verificaEstoqueTipo = true;
 		}else if(tipo == 1){ 
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){ 
 					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+					verificaEstoqueTipo = true;
 				}
 			}
 		} else if(tipo == 2){
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){  
 					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+					verificaEstoqueTipo = true;
 				}
 			}
 		} else if(tipo == 3){ 
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){ 
 					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+					verificaEstoqueTipo = true;
 				}
 			}
 		}
+		if(!verificaEstoqueTipo) System.out.println("Não há produtos deste tipo cadastrados!");
+		return verificaEstoqueTipo;
   }
 
 
 	public void alterarProduto(){
-		System.out.println("Digite o ID do produto a ser alterado: ");
-		int idAlterado = Integer.parseInt(scanner.nextLine());
+		//VERIFICA SE HÁ PRODUTOS A SEREM ALTERADOS
+		if(estoque == 0){
+			System.out.println("Não há produtos cadastrados!");
+			return;
+		} 
+		
 
-		int i = 0;
-		boolean run = true;
-		while(run && i < estoque){
-			if(produtos[i].getId() == idAlterado){
-				run = false;
-			} else {
-				i++;
+		//VERIFICA SE O ID INSERIDO É VÁLIDO, CASO NÃO, PEDE PARA INSERIR NOVAMENTE
+		Produto produtoAlterado;
+		boolean verificaCampo = false;
+		String idAlterado;
+		do{
+			if(!listarProdutos()){
+				return;
 			}
-		}
+			System.out.println("--ALTERANDO PRODUTOS-- (DIGITE SAIR PARA CANCELAR A OPERAÇÃO)");
+			System.out.println("Digite o ID do produto a ser alterado: ");
+			idAlterado = scanner.nextLine();
 
-		if(i < estoque){
+			if(idAlterado.equals("SAIR")){return;} 
+			if(idAlterado.isBlank()){System.out.println("Campo Vazio!! Tente Novamente");}
+			else {
+				if(buscarPorId(Integer.parseInt(idAlterado)) == null) {System.out.println("ID INVÁLIDO");}
+				else {
+					verificaCampo = true;
+				}	
+			}
+		}while(!verificaCampo);
+		produtoAlterado = buscarPorId(Integer.parseInt(idAlterado));
+
+
+		System.out.println("O que deseja alterar do produto? (1 - NOME  | 2 - PREÇO BASE | 3 - QUANTIDADE): ");
+		int alteracao;
+		alteracao = Integer.parseInt(scanner.nextLine());
+
+		if(alteracao == 1){
 			String novoNome;
-            do {
-			    System.out.println("Insira o novo NOME: ");
-                novoNome = scanner.nextLine();
-                if(novoNome.isBlank()){
-                    System.out.println("Campo Vazio!! Tente Novamente");
-                }
-            } while(novoNome.isBlank());
-			produtos[i].setNome(novoNome);
+			do {
+				System.out.println("Insira o novo NOME: ");
+				novoNome = scanner.nextLine();
+				if(novoNome.isBlank()){
+					System.out.println("Campo Vazio!! Tente Novamente");
+				}
+			} while(novoNome.isBlank());
+			produtoAlterado.setNome(novoNome);
 
-			System.out.println("Insira o novo PREÇO BASE: ");
-			BigDecimal novoPrecoBase = new BigDecimal(scanner.nextLine());
-			produtos[i].setPrecoBase(novoPrecoBase);
+		} else if(alteracao == 2){
 
-			System.out.println("Produto Alterado com sucesso!");
-		} else {
-			System.out.println("Não existe um produto com este ID");
+			String novoPrecoBase;
+			do{
+				System.out.println("Insira o novo PREÇO BASE: ");
+				novoPrecoBase = scanner.nextLine();
+				if(novoPrecoBase.isBlank()){
+					System.out.println("Campo Vazio!! Tente Novamente");
+				}
+			} while(novoPrecoBase.isBlank());
+			produtoAlterado.setPrecoBase(new BigDecimal(novoPrecoBase));
+
+		} else if(alteracao == 3){
+			String novaQuantidade;
+			do{
+				System.out.println("Insira a nova QUANTIDADE: ");
+				novaQuantidade = scanner.nextLine();
+				if(novaQuantidade.isBlank()){
+					System.out.println("Campo Vazio!! Tente Novamente");
+				}
+			} while(novaQuantidade.isBlank());
+			produtoAlterado.setQuantidade(Integer.parseInt(novaQuantidade));
 		}
 
+		System.out.println("Produto Alterado com sucesso!");
 	}	
 }
