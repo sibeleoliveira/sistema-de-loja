@@ -1,4 +1,3 @@
-
 package armazenamento;
 
 import produto.*;
@@ -11,13 +10,13 @@ public class ArmazenamentoProdutos extends Armazenamento{
 	private int estoque = 0;
   	private Scanner scanner = new Scanner(System.in);
 	
-	public boolean buscarPorId(int id){
+	public Produto buscarPorId(int id){
 		for(int i = 0; i < estoque; i++){
 			if(produtos[i].getId() == id){
-				return true;
+				return produtos[i];
 			}
 		}
-    	return false;
+    	return null;
   	}
 
   	public void cadastrarProduto(){
@@ -32,13 +31,19 @@ public class ArmazenamentoProdutos extends Armazenamento{
         do {
             System.out.println("Insira o ID: ");
             id = Integer.parseInt(scanner.nextLine());
-            if(buscarPorId(id)){
+            if(buscarPorId(id)!=null){
             System.out.println("ID já cadastrado. Tente outro.");
             }
-        }while(buscarPorId(id));
+        }while(buscarPorId(id)!=null);
     
-        System.out.println("Insira o Nome: ");
-		String nome = scanner.nextLine();
+        String nome;
+        do {
+            System.out.println("Insira o Nome: ");
+            nome = scanner.nextLine();
+            if(nome.isBlank()){
+                System.out.println("Campo Vazio!! Tente Novamente");
+            }
+        } while(nome.isBlank());
 
 		System.out.println("Insira o Preço Base: ");
 		BigDecimal precoBase =  new BigDecimal(scanner.nextLine());
@@ -109,8 +114,14 @@ public class ArmazenamentoProdutos extends Armazenamento{
 		}
 
 		if(i < estoque){
-			System.out.println("Insira o novo NOME: ");
-			String novoNome = scanner.nextLine();
+			String novoNome;
+            do {
+			    System.out.println("Insira o novo NOME: ");
+                novoNome = scanner.nextLine();
+                if(novoNome.isBlank()){
+                    System.out.println("Campo Vazio!! Tente Novamente");
+                }
+            } while(novoNome.isBlank());
 			produtos[i].setNome(novoNome);
 
 			System.out.println("Insira o novo PREÇO BASE: ");
