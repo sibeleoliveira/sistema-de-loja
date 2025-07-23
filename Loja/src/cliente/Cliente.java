@@ -1,6 +1,6 @@
 package cliente;
 
-public class Cliente {
+abstract public class Cliente {
 	    protected int id;
 	    protected String nome;
 	    protected String endereco;
@@ -19,7 +19,5 @@ public class Cliente {
 	    public void setEndereco(String endereco) { this.endereco = endereco; }
 	    public void setTelefone(String telefone) { this.telefone = telefone; }
 
-	    public String getTipo() {
-	    	return "";
-	    };
+	    public abstract String getTipo();
 }

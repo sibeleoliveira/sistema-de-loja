@@ -8,7 +8,6 @@ import produto.*;
 
 public class ArmazenamentoNotas extends Armazenamento {
 	private Nota notas[] = new Nota[MAX];
-	private int emissoes = 0;
 	private Scanner scanner = new Scanner(System.in);
 
 	public void criarNota(ArmazenamentoClientes c, ArmazenamentoProdutos p) {
@@ -24,12 +23,12 @@ public class ArmazenamentoNotas extends Armazenamento {
 			return;
 		}
 
-		if (emissoes >= MAX) {
+		if (estoque >= MAX) {
 			System.out.println("Erro: Limite de notas fiscais atingido!");
 			return;
 		}
 
-		Nota novaNota = new Nota(cliente, emissoes + 1);
+		Nota novaNota = new Nota(cliente, estoque + 1);
 
 		String continuar;
 		do {
@@ -63,17 +62,17 @@ public class ArmazenamentoNotas extends Armazenamento {
 
 		} while (continuar.equalsIgnoreCase("s"));
 
-		this.notas[emissoes++] = novaNota;
+		this.notas[estoque++] = novaNota;
 		novaNota.exibirResumo();
 		System.out.println("Nota criada com sucesso!");
 	}
 
 	public void listarNotasEmitidas() {
 		System.out.println("\n--- Notas Fiscais Emitidas ---");
-		if (emissoes == 0) {
+		if (estoque == 0) {
 			System.out.println("Nenhuma nota foi emitida ainda.");
 		} else {
-			for (int i = 0; i < emissoes; i++) {
+			for (int i = 0; i < estoque; i++) {
 				notas[i].exibirResumo();
 			}
 		}

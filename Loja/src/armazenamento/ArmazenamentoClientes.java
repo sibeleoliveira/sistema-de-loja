@@ -9,7 +9,6 @@ public class ArmazenamentoClientes extends Armazenamento {
 	protected static final int MAX = 100;
 	private Cliente[] clientes = new Cliente[MAX];
 	private Scanner scanner = new Scanner(System.in);
-	private int estoque = 0;
 
 	public Cliente buscarPorId(int id) {
 		for (int i = 0; i < estoque; i++) {

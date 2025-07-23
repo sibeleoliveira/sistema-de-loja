@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class ArmazenamentoProdutos extends Armazenamento{
 	protected static final int MAX = 100;
   	private Produto[] produtos = new Produto[MAX];
-	private int estoque = 0;
   	private Scanner scanner = new Scanner(System.in);
 	
 	public Produto buscarPorId(int id){
@@ -97,12 +96,28 @@ public class ArmazenamentoProdutos extends Armazenamento{
 			if(tipo < 1 || tipo > 3) System.out.println("Não há esse tipo, digite novamente!");
 		}while(tipo < 1 || tipo > 3);
 
+		verificaCampo = false;
+		String inputEspecifico;
+		do{
+			if(tipo == 1) System.out.println("Insira o Peso(G): ");
+			else if(tipo == 2) System.out.println("Insira o Tamanho(KB): ");
+			else System.out.println("Insira a Validade(dias): ");
+			inputEspecifico = scanner.nextLine();
+
+			if(inputEspecifico.equals("SAIR")) return; //VERIFICA SE O USUÁRIO QUER SAIR
+			if(inputEspecifico.isBlank()){
+				System.out.println("Campo Vazio!! Tente Novamente"); //VERIFICA SE O CAMPO ESTÁ VAZIO
+			} else {
+				verificaCampo = true;
+			}
+		}while(!verificaCampo);
+
 		if(tipo == 1){
-			produtos[estoque++] = new ProdutoFisico(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase));
+			produtos[estoque++] = new ProdutoFisico(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
 		} else if(tipo == 2){
-			produtos[estoque++] = new ProdutoDigital(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase));
+			produtos[estoque++] = new ProdutoDigital(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
 		} else if(tipo == 3){
-			produtos[estoque++] = new ProdutoPerecivel(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase));
+			produtos[estoque++] = new ProdutoPerecivel(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
 		}
 
 		System.out.println("Produto cadastrado com sucesso!");
@@ -139,21 +154,21 @@ public class ArmazenamentoProdutos extends Armazenamento{
 		}else if(tipo == 1){ 
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){ 
-					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | PESO(KG): %.2f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getEspecifico());
 					verificaEstoqueTipo = true;
 				}
 			}
 		} else if(tipo == 2){
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){  
-					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | TAMANHO(MB): .2f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getEspecifico());
 					verificaEstoqueTipo = true;
 				}
 			}
 		} else if(tipo == 3){ 
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){ 
-					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade());
+					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | VALIDADE(dias): %.1f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getEspecifico());
 					verificaEstoqueTipo = true;
 				}
 			}

@@ -2,9 +2,9 @@ package produto;
 
 import java.math.BigDecimal;
 
-public class Produto {
+abstract public class Produto {
   //Atributos
-  private int id, quantidade, tipo;
+  private int id, quantidade;
   private String nome;
   private BigDecimal precoBase;
   
@@ -18,44 +18,22 @@ public class Produto {
   }
 
   //Getters
-  public int getId(){
-    return id;
-  }
+  public int getId(){return id;}
+  public int getQuantidade(){return quantidade; }
+  public String getNome(){return nome;}
+  public BigDecimal getPrecoBase(){return precoBase;}
 
-  public int getQuantidade(){
-    return quantidade;
-  }
 
-  public String getNome(){
-    return nome;
-  }
-
-  public BigDecimal getPrecoBase(){
-    return precoBase;
-  }
-
-  public int getTipo(){
-    return tipo;
-  }
+  public abstract double getEspecifico();
+  public abstract int getTipo();
 
   //Setters
-  public void setId(int id){
-    this.id = id;
-  }
+  public void setId(int id){this.id = id;}
+  public void setQuantidade(int quantidade){this.quantidade = quantidade;}
+  public void setNome(String nome){this.nome = nome;}
+  public void setPrecoBase(BigDecimal precoBase){this.precoBase = precoBase;}
 
-  public void setQuantidade(int quantidade){
-    this.quantidade = quantidade;
-  }
-
-  public void setNome(String nome){
-    this.nome = nome;
-  }
-
-  public void setPrecoBase(BigDecimal precoBase){
-    this.precoBase = precoBase;
-  }
-  public void reduzQuantidade (int quant) {
-	  this.quantidade-=quant;
-  }
+  //Método
+  public void reduzQuantidade (int quant) {this.quantidade-=quant;}
   
 }
