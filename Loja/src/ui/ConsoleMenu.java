@@ -3,13 +3,15 @@ package ui;
 import armazenamento.*;
 import java.util.Scanner;
 
-public class ConsoleMenu {
+public class ConsoleMenu implements Menu {
 	private String input;
 	private ArmazenamentoClientes clientes = new ArmazenamentoClientes();
 	private ArmazenamentoProdutos produtos = new ArmazenamentoProdutos();
 	private ArmazenamentoNotas notas = new ArmazenamentoNotas();
 	private Scanner scanner = new Scanner(System.in);
 
+	
+	//implementação da interface 
 	public void play() {
 		boolean verificaSaida = false; 
 		do {
