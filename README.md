@@ -1,15 +1,10 @@
 # sistema-de-loja
 
-
-Com base em todos os arquivos fornecidos, aqui está uma proposta de README em português para o seu repositório do GitHub.
-
------
+EQUIPE RESPONSÁVEL: Brenno Philippe Silva dos Santos, Sibele Oliveira Cruz e Silas Santos da Silva.
 
 # Sistema de Gerenciamento de Vendas em Console
 
 Este é um projeto de um sistema de gerenciamento de vendas e estoque, desenvolvido em Java e executado via console. O sistema permite cadastrar e gerenciar clientes e produtos, além de criar notas de compra, simulando um ambiente básico de ponto de venda. O principal objetivo do projeto é aplicar os conceitos fundamentais de **Programação Orientada a Objetos (POO)** absorvidos durante a disciplina.
-
-
 
 ## Entre as funcionalidades presentes no projeto, estão: 
 
@@ -99,3 +94,6 @@ A interface `Menu.java` define um contrato simples: qualquer classe que a implem
         }
         ```
       * **Relevância:** Para exibir dados completos, como o CPF ou o CNPJ, que não existem na classe `Cliente`, o Downcast é essencial. O uso do operador `instanceof` antes da conversão é uma prática de programação segura fundamental para evitar o erro `ClassCastException` em tempo de execução, garantindo que o Downcast só seja feito se o objeto for realmente daquele tipo.
+   
+
+Observação: Esse projeto trata-se de um atividade acadêmica realizada pelos alunos supracitados do Departamento de Computação (DCOMP) da Universidade Federal de Sergipe na disciplina de Programação Orientada a Objetos, ministrada pelo Professor Kalil Bispo, no período de 2025.1.
