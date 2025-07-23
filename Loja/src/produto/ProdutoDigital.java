@@ -5,20 +5,18 @@ import java.math.BigDecimal;
 public class ProdutoDigital extends Produto{
   //Id do tipo;
   private static final int tipo = 2;
-  private double tamanhoKB; 
+  private double tamanhoMB; 
 
   //Construtor
-  public ProdutoDigital(int id, int quantidade, String nome, BigDecimal precoBase, double tamanhoKB){
+  public ProdutoDigital(int id, int quantidade, String nome, BigDecimal precoBase, double tamanhoMB){
     super(id, quantidade, nome, precoBase);
-    this.tamanhoKB = tamanhoKB;
+    this.tamanhoMB = tamanhoMB;
   }
 
   //Getters
   public int getTipo(){return tipo;}
-  public double getTamanhoKB(){return tamanhoKB;}
-  public double getEspecifico(){return tamanhoKB;}
-
+  public double getTamanhoMB(){return tamanhoMB;}
 
   //Setters
-  public void setTamanhoKB(int tamanhoKB){this.tamanhoKB = tamanhoKB;}
+  public void setTamanhoMB(int tamanhoMB){this.tamanhoMB = tamanhoMB;}
 }

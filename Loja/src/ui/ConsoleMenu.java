@@ -1,7 +1,6 @@
 package ui;
 
 import armazenamento.*;
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ConsoleMenu {
@@ -33,7 +32,6 @@ public class ConsoleMenu {
 			} else if (Integer.parseInt(input) == 3) {
 				clientes.cadastrarCliente();
 			} else if (Integer.parseInt(input) == 4) {
-				clientes.listarClientes();
 				clientes.alterarCliente();
 			} else if (Integer.parseInt(input) == 5) {
 				notas.criarNota(clientes,produtos);

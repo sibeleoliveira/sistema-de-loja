@@ -1,5 +1,6 @@
 package cliente;
 
+//Abstração da classe Cliente
 abstract public class Cliente {
 	    protected int id;
 	    protected String nome;
@@ -19,5 +20,6 @@ abstract public class Cliente {
 	    public void setEndereco(String endereco) { this.endereco = endereco; }
 	    public void setTelefone(String telefone) { this.telefone = telefone; }
 
+		//Abstração do método getTipo()
 	    public abstract String getTipo();
 }

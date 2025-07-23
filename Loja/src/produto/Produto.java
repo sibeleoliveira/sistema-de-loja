@@ -23,8 +23,7 @@ abstract public class Produto {
   public String getNome(){return nome;}
   public BigDecimal getPrecoBase(){return precoBase;}
 
-
-  public abstract double getEspecifico();
+  //Abstração do Método getTipo
   public abstract int getTipo();
 
   //Setters

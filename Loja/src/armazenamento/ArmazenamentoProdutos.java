@@ -99,8 +99,8 @@ public class ArmazenamentoProdutos extends Armazenamento{
 		verificaCampo = false;
 		String inputEspecifico;
 		do{
-			if(tipo == 1) System.out.println("Insira o Peso(G): ");
-			else if(tipo == 2) System.out.println("Insira o Tamanho(KB): ");
+			if(tipo == 1) System.out.println("Insira o Peso(KG): ");
+			else if(tipo == 2) System.out.println("Insira o Tamanho(MB): ");
 			else System.out.println("Insira a Validade(dias): ");
 			inputEspecifico = scanner.nextLine();
 
@@ -117,7 +117,7 @@ public class ArmazenamentoProdutos extends Armazenamento{
 		} else if(tipo == 2){
 			produtos[estoque++] = new ProdutoDigital(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
 		} else if(tipo == 3){
-			produtos[estoque++] = new ProdutoPerecivel(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
+			produtos[estoque++] = new ProdutoPerecivel(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Integer.parseInt(inputEspecifico));
 		}
 
 		System.out.println("Produto cadastrado com sucesso!");
@@ -148,27 +148,40 @@ public class ArmazenamentoProdutos extends Armazenamento{
 		System.out.println("-- Lista de Produtos--");
 		if(tipo == 0){
 			for(int i = 0; i < estoque; i++) {
-				System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | TIPO: %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getTipo());
+				System.out.printf("|ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | TIPO: %d |", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getTipo());
+				if(produtos[i] instanceof ProdutoFisico) {
+					ProdutoFisico pF = (ProdutoFisico)produtos[i];
+					System.out.printf("PESO(KG): %.1f|\n", pF.getPeso());
+				} else if(produtos[i] instanceof ProdutoDigital){
+					ProdutoDigital pD = (ProdutoDigital)produtos[i];
+					System.out.printf("TAMANHO(MB): %.1f|\n", pD.getTamanhoMB());
+				}else if(produtos[i] instanceof ProdutoPerecivel){
+					ProdutoPerecivel pP = (ProdutoPerecivel)produtos[i];
+					System.out.printf("VALIDADE(DIAS): %d|\n", pP.getValidadeDias());
+				}
 			}
 			if(estoque != 0) verificaEstoqueTipo = true;
 		}else if(tipo == 1){ 
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){ 
-					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | PESO(KG): %.2f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getEspecifico());
+					ProdutoFisico pF = (ProdutoFisico)produtos[i];
+					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | PESO(KG): %.1f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), pF.getPeso());
 					verificaEstoqueTipo = true;
 				}
 			}
 		} else if(tipo == 2){
 			for(int i = 0; i < estoque; i++) {
-				if(produtos[i].getTipo() == tipo){  
-					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | TAMANHO(MB): .2f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getEspecifico());
+				if(produtos[i].getTipo() == tipo){ 
+					ProdutoDigital pD = (ProdutoDigital)produtos[i]; 
+					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | TAMANHO(MB): %.1f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), pD.getTamanhoMB());
 					verificaEstoqueTipo = true;
 				}
 			}
 		} else if(tipo == 3){ 
 			for(int i = 0; i < estoque; i++) {
 				if(produtos[i].getTipo() == tipo){ 
-					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | VALIDADE(dias): %.1f\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), produtos[i].getEspecifico());
+					ProdutoPerecivel pP = (ProdutoPerecivel)produtos[i];
+					System.out.printf("ID: %d | NOME: %s | PREÇO BASE: R$%.2f | QUANTIDADE: %d | VALIDADE(dias): %d\n", produtos[i].getId(), produtos[i].getNome(), produtos[i].getPrecoBase(), produtos[i].getQuantidade(), pP.getValidadeDias());
 					verificaEstoqueTipo = true;
 				}
 			}

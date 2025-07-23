@@ -14,7 +14,6 @@ public class ProdutoFisico extends Produto {
   //Getters
   public int getTipo(){return tipo;}
   public double getPeso(){return peso;}
-  public double getEspecifico(){return peso;}
 
 
   //Setters

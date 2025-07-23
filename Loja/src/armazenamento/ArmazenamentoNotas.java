@@ -20,10 +20,11 @@ public class ArmazenamentoNotas extends Armazenamento {
 
 		Cliente cliente;
 		boolean verificaCampo = false;
+		String inputIdCliente;
 		do {
 			c.listarClientes();
-			System.out.print("Digite o ID do cliente: ");
-			String inputIdCliente = scanner.nextLine();
+			System.out.println("Digite o ID do cliente: ");
+			inputIdCliente = scanner.nextLine();
 			if (inputIdCliente.equalsIgnoreCase("SAIR")) return; // VERIFICA SE O USUÁRIO QUER SAIR
 			
 			if(inputIdCliente.isBlank()){
@@ -38,7 +39,7 @@ public class ArmazenamentoNotas extends Armazenamento {
 					}
 				}
 		} while (!verificaCampo);
-		cliente = c.buscarPorId(Integer.parseInt(scanner.nextLine()));
+		cliente = c.buscarPorId(Integer.parseInt(inputIdCliente));
 
 		if (estoque >= MAX) {
 			System.out.println("Erro: Limite de notas fiscais atingido!");
@@ -57,7 +58,7 @@ public class ArmazenamentoNotas extends Armazenamento {
 			verificaCampo = false;
 			
 			do{
-				System.out.print("Digite o ID do produto para adicionar: ");
+				System.out.println("Digite o ID do produto para adicionar: ");
 				String idProdutoInput = scanner.nextLine();
 				if(idProdutoInput.equalsIgnoreCase("SAIR")) return;
 
@@ -76,7 +77,7 @@ public class ArmazenamentoNotas extends Armazenamento {
 			int quantidade = 0;
 			verificaCampo = false;
 			do{
-				System.out.print("Digite a quantidade: ");
+				System.out.println("Digite a quantidade: ");
 				String quantidadeInput = scanner.nextLine();
 				if(quantidadeInput.equalsIgnoreCase("SAIR")) return;
 				
@@ -103,7 +104,7 @@ public class ArmazenamentoNotas extends Armazenamento {
 			System.out.println("Item adicionado!");
 
 			do {
-				System.out.print("Adicionar outro item? (s/n): ");
+				System.out.println("Adicionar outro item? (s/n): ");
 				continuar = scanner.nextLine();
 				if (continuar.isBlank()) {
 					System.out.println("Campo Vazio!! Tente Novamente");
