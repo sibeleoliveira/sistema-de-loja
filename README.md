@@ -1,6 +1,6 @@
 # sistema-de-loja
 
-EQUIPE RESPONSÁVEL: Brenno Philippe Silva dos Santos, Sibele Oliveira Cruz e Silas Santos da Silva.
+EQUIPE RESPONSÁVEL: Brenno Phelipe Silva dos Santos, Sibele Oliveira Cruz e Silas Santos da Silva.
 
 # Sistema de Gerenciamento de Vendas em Console
 
