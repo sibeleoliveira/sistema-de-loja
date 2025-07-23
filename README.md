@@ -2,7 +2,7 @@
 
 EQUIPE RESPONSÁVEL: Brenno Phelipe Silva dos Santos, Sibele Oliveira Cruz e Silas Santos da Silva.
 
-# Sistema de Gerenciamento de Vendas em Console
+# Sistema de Gerenciamento de Vendas
 
 Este é um projeto de um sistema de gerenciamento de vendas e estoque, desenvolvido em Java e executado via console. O sistema permite cadastrar e gerenciar clientes e produtos, além de criar notas de compra, simulando um ambiente básico de ponto de venda. O principal objetivo do projeto é aplicar os conceitos fundamentais de **Programação Orientada a Objetos (POO)** absorvidos durante a disciplina.
 
