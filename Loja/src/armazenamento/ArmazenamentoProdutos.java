@@ -112,7 +112,7 @@ public class ArmazenamentoProdutos extends Armazenamento{
 			}
 		}while(!verificaCampo);
 
-		if(tipo == 1){
+		if(tipo == 1){            //UPCAST IMPLÍCITO 
 			produtos[estoque++] = new ProdutoFisico(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
 		} else if(tipo == 2){
 			produtos[estoque++] = new ProdutoDigital(Integer.parseInt(inputId), Integer.parseInt(inputQuantidade), nome, new BigDecimal(inputPrecoBase), Double.parseDouble(inputEspecifico));
